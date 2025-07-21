@@ -62,10 +62,10 @@ LOG_LEVEL=debug
 ```json
 {
 
-  "codigo"      : string,
-  "mensaje"     : string,
-  "status"      : number,
-  "folio"       : string,
+  "codigo"      : "string",
+  "mensaje"     : "string",
+  "status"      : "number",
+  "folio"       : "string",
   "resultado"   :  {
     // ...datos a retornar, puede ser opcional
   }
@@ -97,4 +97,13 @@ LOG_LEVEL=debug
    npm run dev
    ```
 
----
+## Ventajas de usar loaders
+
+Cargar la configuración y servicios mediante loaders tiene los siguientes beneficios:
+
+- Permite inicializar y configurar módulos (Express, middlewares, logger, rutas, etc.) de forma modular y ordenada.
+- Facilita la escalabilidad, ya que puedes agregar o modificar funcionalidades sin alterar el entry point principal.
+- Mejora la mantenibilidad, separando la lógica de arranque/configuración de la lógica de negocio.
+- Hace más sencillo el testing y la reutilización de componentes, ya que cada loader puede ser probado de forma independiente.
+- Centraliza la gestión de dependencias y configuraciones, evitando código duplicado y desordenado en el archivo principal.
+
