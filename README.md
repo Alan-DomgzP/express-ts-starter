@@ -1,4 +1,4 @@
-# Express-ts API
+# Bluepiru API
 
 Proyecto backend desarrollado en Node.js con TypeScript y Express, diseñado para exponer endpoints RESTful para operaciones de apertura de cuentas y gestión de seguridad.
 
@@ -48,23 +48,34 @@ El proyecto utiliza variables de entorno definidas en un archivo `.env` en la ra
 ```
 PORT=3000
 HOST=http://localhost:3000
-KEY=usuario
-SECRET=contraseña
-LOG_LEVEL=info
-prefix=/api
-sec_key=/seguridad
-account_opening=/apertura
+
+LOG_LEVEL=debug
+
 ```
 
 ## Endpoints principales
 
-- **POST `/apertura`** — Endpoint para apertura de cuentas.
+- **POST `/`** — Endpoint para tu API
+
+### Respuesta esperada
+
+```json
+{
+
+  "codigo"      : string,
+  "mensaje"     : string,
+  "status"      : number,
+  "folio"       : string,
+  "resultado"   :  {
+    // ...datos a retornar, puede ser opcional
+  }
+}
+```
 
 ## Estructura de middlewares
 
-- **Logger**: Registro de peticiones y respuestas.
-- **Token**: Validación de token de seguridad.
-- **Keys**: Obtención y validación de llaves de seguridad.
+- **Logger**: Registro de peticiones y respuestas (Winston/Morgan).
+
 
 ## Estándares y buenas prácticas
 
@@ -87,5 +98,3 @@ account_opening=/apertura
    ```
 
 ---
-
-> Proyecto desarrollado por [Tu Nombre].
