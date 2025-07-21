@@ -1,4 +1,4 @@
-# Bluepiru API
+# Express-ts API
 
 Proyecto backend desarrollado en Node.js con TypeScript y Express, diseñado para exponer endpoints RESTful
 
