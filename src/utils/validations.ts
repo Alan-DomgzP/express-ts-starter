@@ -17,22 +17,14 @@ class Validations {
     return false;
   };
 
-  static accountOpeningJoiValidation = Joi.object({
-    // privateKey: Joi.string().empty('').required().messages({
-    //   'any.required': 'La llave privada es requerida'
-    // }),
-    publicKey: Joi.string().empty('').required().messages({
-      'any.required': 'La llave pública es requerida'
+  static authJoiValidation = Joi.object({
+    username: Joi.string().empty('').pattern(/^\d{4,10}$/).required().messages({
+      'any.required': 'Username is required',
+      'string.pattern.base': 'Usernames is only digits'
     }),
-    folio: Joi.string().empty('').required().messages({
-      'any.required': 'El folio es requerido'
+    password: Joi.string().empty('').required().messages({
+      'any.required': 'Password is required'
     })
-    // TODO: Agregar los siguientes valores en la validación de Joi
-    //     "numeroClienteCore": "",
-    // "numeroRECA": "",
-    // "idPais": "",
-    // "idCanal": "",
-    // "idSucursal": "",
   });
 
 

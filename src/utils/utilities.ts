@@ -2,7 +2,6 @@ import os from 'os';
 import { Request, Response } from 'express'
 import https from 'https';
 import axios, { AxiosRequestConfig } from 'axios';
-import { publicEncrypt, privateDecrypt, constants } from 'crypto';
 
 import logger from '@loaders/logger'
 import { ExtendedMessageObject, Resultado, ResponseTO } from '@helpers/interfaces/response'
@@ -135,56 +134,6 @@ class Utilities {
 
     return axios.get(url, config);
   }
-
-
-  static encryptWithPublicKey = (rawPublicKey: string, data: string): string  => {
-    const publicKey = Utilities.toPem(rawPublicKey, 'public');
-    const buffer = Buffer.from(data, 'utf8');
-
-    const encrypted = publicEncrypt(
-      {
-        key: publicKey,
-        padding: constants.RSA_PKCS1_PADDING,
-      },
-      buffer
-    );
-
-    return encrypted.toString('base64');
-  }
-  
-  static decryptWithPrivateKey = (rawPrivateKey: string, encryptedBase64: string): string  => {
-    const privateKey = Utilities.toPem(rawPrivateKey, 'private');
-    const buffer = Buffer.from(encryptedBase64, 'base64');
-
-    const decrypted = privateDecrypt(
-      {
-        key: privateKey,
-        padding: constants.RSA_PKCS1_PADDING,
-      },
-      buffer
-    );
-
-    return decrypted.toString('utf8');
-  }
-
-  static toPem = (key: string, type: 'public' | 'private'): string => {
-    // Elimina espacios o saltos de línea existentes
-    const cleanedKey = key.replace(/\s+/g, '');
-
-    // Encabezados específicos para PKCS#8 (formato que usa tu API)
-    const header = type === 'public' 
-      ? '-----BEGIN PUBLIC KEY-----' 
-      : '-----BEGIN PRIVATE KEY-----'; // PKCS#8 (no usa "RSA PRIVATE KEY")
-
-    const footer = type === 'public' 
-      ? '-----END PUBLIC KEY-----' 
-      : '-----END PRIVATE KEY-----';
-
-    // Divide en líneas de 64 caracteres
-    const body = cleanedKey.match(/.{1,64}/g)?.join('\n') || '';
-
-    return `${header}\n${body}\n${footer}`;
-  };
 
 
   static sanitizeString(str: string): string {

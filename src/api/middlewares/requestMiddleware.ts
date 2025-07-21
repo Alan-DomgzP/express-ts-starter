@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 // import token from '@api/routes/token';
 
 
-
 const validateRequest = async (_req: Request, _res: Response, _next: NextFunction) => {
   
 
